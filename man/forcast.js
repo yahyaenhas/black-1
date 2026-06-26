@@ -3,9 +3,9 @@ let weather =  (lat,lon, callback ) => {
     let url2 = `https://api.weatherapi.com/v1/current.json?key=eebc71126480455db69213430262406&q=${lat},${lon}&aqi=no`
     req({url:url2,json:true},(error,response)=>{
         if(error){
-            callback(undefined,"Unable to connect to weather service")
+            callback("Unable to connect to weather service",undefined)
         }else if(response.body.error){
-            callback(undefined,response.body.error.message)
+            callback(response.body.error.message,undefined)
         }else{
             callback(undefined,`${response.body.location.name} is ${response.body.current.condition.text} and temperature is ${response.body.current.temp_c}°C`)
         }

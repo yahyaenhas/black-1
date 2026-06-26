@@ -12,10 +12,18 @@ const geocode = require("./man/geocode.js")
 geocode(process.argv[2], (err , read)=>{
     console.log("Error:",err)
     console.log("result:",read)
+    if(!err){
         weather(read.lat,read.lon, (err , read)=>{
             console.log("Error:",err)
             console.log("result:",read)
         })
+    }else{
+        weather(0,0, (err , read)=>{
+            console.log("Error:",err)
+            console.log("result:",read)
+        })
+    }
+        
 })
 
 

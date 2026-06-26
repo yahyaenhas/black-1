@@ -1,15 +1,14 @@
 let req = require("request")
 
 const geocode = (address,callback)=>{
-// console.log(process.argv[2])
+
 url =`https://api.weatherapi.com/v1/current.json?key=eebc71126480455db69213430262406&q=${address}&aqi=no`
 
 req({url , json:true},(error,response)=>{
     if(error){
-        callback(undefined,"Unable to connect to weather service")
+        callback("Unable to connect to weather service",undefined)
     }else if(response.body.error){
-        console.log(response.body)
-            callback(undefined,response.body.error.message)
+            callback(response.body.error.message,undefined)
 
     }else if(response.body.location.name === undefined){
            callback("Unable to find location. Try another search.",undefined)
@@ -20,7 +19,7 @@ req({url , json:true},(error,response)=>{
         }
      
     )
-        // weather(lat,lon,callback)
+    
     }
 
 })
